@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:program_visit/common/styles/color.dart';
 
-class ButtonGradient extends StatelessWidget {
-  const ButtonGradient({super.key});
+class ButtonGradient extends StatefulWidget {
+  const ButtonGradient({super.key, required this.onTap});
 
+  final void Function()? onTap;
+
+  @override
+  State<ButtonGradient> createState() => _ButtonGradientState();
+}
+
+class _ButtonGradientState extends State<ButtonGradient> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +23,7 @@ class ButtonGradient extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: widget.onTap,
         child: Stack(
           children: [
             Positioned(

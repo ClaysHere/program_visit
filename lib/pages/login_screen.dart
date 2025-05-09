@@ -5,6 +5,7 @@ import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/widgets/button_style.dart';
 import 'package:program_visit/common/widgets/input_form.dart';
 import 'package:program_visit/common/widgets/label.dart';
+import 'package:program_visit/pages/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -103,7 +104,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: 50),
 
-                    ButtonGradient(),
+                    ButtonGradient(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
