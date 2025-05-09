@@ -1,11 +1,20 @@
+// ignore_for_file: dead_code
+
 import 'package:flutter/material.dart';
 import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/widgets/button_style.dart';
 import 'package:program_visit/common/widgets/input_form.dart';
 import 'package:program_visit/common/widgets/label.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool enablePassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +63,6 @@ class LoginScreen extends StatelessWidget {
                     Label(text: "Username"),
                     SizedBox(height: 10),
                     InputForm(
-                      obscureText: true,
                       prefixIcon: Image.asset(
                         "assets/icons/user.png",
                         width: 22,
@@ -69,13 +77,28 @@ class LoginScreen extends StatelessWidget {
                     Label(text: "Password"),
                     SizedBox(height: 10),
                     InputForm(
-                      obscureText: false,
+                      obscureText: enablePassword,
                       prefixIcon: Image.asset(
                         "assets/icons/lock.png",
                         width: 22,
                         height: 22,
                       ),
                       hintText: "Masukkan Password Anda",
+                      suffixIcon: IconButton(
+                        highlightColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        onPressed: () {
+                          setState(() {
+                            enablePassword = !enablePassword;
+                          });
+                        },
+                        icon: Icon(
+                          enablePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
 
                     SizedBox(height: 50),

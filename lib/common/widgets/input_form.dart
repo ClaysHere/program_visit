@@ -7,7 +7,7 @@ class InputForm extends StatelessWidget {
     this.controller,
     this.validator,
     this.prefixIcon,
-    required this.obscureText,
+    this.obscureText = false,
     this.suffixIcon,
   });
 
