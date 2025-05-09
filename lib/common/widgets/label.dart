@@ -15,10 +15,19 @@ class Label extends StatelessWidget {
             text: text,
             style: TextStyle(
               fontFamily: "Poppins",
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w400,
+              fontSize: 17,
+              color: Colors.black,
             ),
           ),
-          TextSpan(text: simbol),
+          TextSpan(
+            text: simbol,
+            style: TextStyle(
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w600,
+              fontSize: 17,
+            ),
+          ),
         ],
       ),
     );
