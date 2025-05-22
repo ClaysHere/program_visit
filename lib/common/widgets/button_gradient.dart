@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:program_visit/common/styles/color.dart';
 
 class ButtonGradient extends StatefulWidget {
-  const ButtonGradient({super.key, required this.onTap});
+  const ButtonGradient({super.key, required this.onTap, required this.title});
 
+  final String title;
   final void Function()? onTap;
 
   @override
@@ -29,10 +30,10 @@ class _ButtonGradientState extends State<ButtonGradient> {
             Positioned(
               child: Center(
                 child: Text(
-                  "Login",
+                  widget.title,
                   style: TextStyle(
                     fontFamily: "Poppins",
-                    fontSize: 21,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
