@@ -1,33 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class AvatarProfile extends StatelessWidget {
-//   const AvatarProfile({
-//     super.key,
-//     required this.imagePath,
-//     required this.width,
-//     required this.height,
-//   });
-
-//   final String imagePath;
-//   final double width;
-//   final double height;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return CircleAvatar(
-//       radius: 45,
-//       child: ClipOval(
-//         child: Image.asset(
-//           imagePath,
-//           width: width,
-//           height: height,
-//           fit: BoxFit.cover,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 
 class AvatarProfile extends StatelessWidget {
@@ -36,11 +6,13 @@ class AvatarProfile extends StatelessWidget {
     required this.imagePath,
     required this.width,
     required this.height,
+    required this.radius,
   });
 
   final String imagePath;
   final double width;
   final double height;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +23,7 @@ class AvatarProfile extends StatelessWidget {
         border: Border.all(color: Color(0xffc9c9c9), width: 1),
       ),
       child: CircleAvatar(
-        radius: 40,
+        radius: radius,
         backgroundColor: Colors.transparent,
         child: ClipOval(
           child: Image.asset(

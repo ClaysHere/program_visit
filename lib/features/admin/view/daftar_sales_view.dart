@@ -20,6 +20,7 @@ class DaftarSalesView extends StatelessWidget {
           fontSize: 20,
           fontWeight: AppFontWeight.semiBold,
         ),
+        scrolledUnderElevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 15),
           child: ArrowBack(
@@ -30,16 +31,22 @@ class DaftarSalesView extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        padding: const EdgeInsets.only(
+          left: 30,
+          right: 30,
+          bottom: 35,
+          top: 20,
+        ),
         child: Column(
           children: [
             Expanded(
               child: ListView(
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   CardDaftarSales(
-                    imagePath: "assets/images/man.png",
+                    imagePath: "assets/icons/profile.png",
                     nama: 'Jhon Doe',
-                    tanggal: 'JL. Kemanggisan Utara, Medan',
+                    tanggal: "22 Mei 2025",
                     button: ButtonNormal(
                       onPressed: () {},
                       text: "Lihat Detail",
@@ -49,9 +56,9 @@ class DaftarSalesView extends StatelessWidget {
                   SizedBox(height: 10),
 
                   CardDaftarSales(
-                    imagePath: "assets/images/man.png",
+                    imagePath: "assets/icons/profile.png",
                     nama: 'Irfan Mulya',
-                    tanggal: 'JL. Kemanggisan Utara, Medan',
+                    tanggal: "22 Mei 2025",
                     button: ButtonNormal(
                       onPressed: () {},
                       text: "Lihat Detail",
@@ -61,9 +68,9 @@ class DaftarSalesView extends StatelessWidget {
                   SizedBox(height: 10),
 
                   CardDaftarSales(
-                    imagePath: "assets/images/man.png",
+                    imagePath: "assets/icons/profile.png",
                     nama: 'M Fikri',
-                    tanggal: 'JL. Kemanggisan Utara, Medan',
+                    tanggal: "22 Mei 2025",
                     button: ButtonNormal(
                       onPressed: () {},
                       text: "Lihat Detail",
@@ -73,9 +80,9 @@ class DaftarSalesView extends StatelessWidget {
                   SizedBox(height: 10),
 
                   CardDaftarSales(
-                    imagePath: "assets/images/man.png",
+                    imagePath: "assets/icons/profile.png",
                     nama: 'M Fikri',
-                    tanggal: 'JL. Kemanggisan Utara, Medan',
+                    tanggal: "22 Mei 2025",
                     button: ButtonNormal(
                       onPressed: () {},
                       text: "Lihat Detail",
@@ -85,9 +92,9 @@ class DaftarSalesView extends StatelessWidget {
                   SizedBox(height: 10),
 
                   CardDaftarSales(
-                    imagePath: "assets/images/man.png",
+                    imagePath: "assets/icons/profile.png",
                     nama: 'M Fikri',
-                    tanggal: 'JL. Kemanggisan Utara, Medan',
+                    tanggal: "22 Mei 2025 (tanggal daftar)",
                     button: ButtonNormal(
                       onPressed: () {},
                       text: "Lihat Detail",
@@ -99,7 +106,7 @@ class DaftarSalesView extends StatelessWidget {
 
             Pagination(label: "Halaman 1 dari 10"),
 
-            SizedBox(height: 30),
+            SizedBox(height: 15),
 
             ButtonGradient(onTap: () {}, title: "Tambah Sales"),
           ],

@@ -29,9 +29,14 @@ class CardDaftarSales extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AvatarProfile(imagePath: imagePath, width: 80, height: 80),
+          AvatarProfile(
+            radius: 40,
+            imagePath: imagePath,
+            width: 80,
+            height: 80,
+          ),
 
-          const SizedBox(width: 25),
+          const SizedBox(width: 10),
 
           Expanded(
             child: Column(

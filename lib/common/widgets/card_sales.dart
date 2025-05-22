@@ -21,6 +21,7 @@ class CardSales extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AvatarProfile(
+            radius: 30,
             imagePath: "assets/icons/profile.png",
             width: 60,
             height: 60,

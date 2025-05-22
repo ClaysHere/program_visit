@@ -29,7 +29,7 @@ class CardDaftarToko extends StatelessWidget {
             child: Image.asset(
               imagePath,
               width: 190,
-              height: 150,
+              height: 130,
               fit: BoxFit.cover,
             ),
           ),
