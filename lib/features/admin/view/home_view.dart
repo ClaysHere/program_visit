@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
+import 'package:program_visit/common/widgets/card_daftar_toko.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/row_text.dart';
@@ -87,6 +88,7 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: RowText(
+                onPressed: () {},
                 textKiri: "Daftar Sales",
                 textKanan: "Lihat lainnya",
               ),
@@ -113,6 +115,7 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: RowText(
+                onPressed: () {},
                 textKiri: "Daftar Customer",
                 textKanan: "Lihat lainnya",
               ),
@@ -139,8 +142,28 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: RowText(
+                onPressed: () {},
                 textKiri: "Daftar Toko",
                 textKanan: "Lihat lainnya",
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Row(
+                  children: List.generate(
+                    5,
+                    (index) => Padding(
+                      padding: EdgeInsets.only(right: 10),
+                      child: CardDaftarToko(
+                        name: "Makmur Jaya",
+                        imagePath: "assets/images/toko.webp",
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
 

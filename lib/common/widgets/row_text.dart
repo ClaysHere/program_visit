@@ -3,10 +3,16 @@ import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 
 class RowText extends StatelessWidget {
-  const RowText({super.key, required this.textKiri, required this.textKanan});
+  const RowText({
+    super.key,
+    required this.textKiri,
+    required this.textKanan,
+    required this.onPressed,
+  });
 
   final String textKiri;
   final String textKanan;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class RowText extends StatelessWidget {
           color: Color(0xff414549),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: onPressed,
           child: CustomTextStyle(
             text: textKanan,
             fontSize: 12,

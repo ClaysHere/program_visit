@@ -10,7 +10,6 @@ class CardCustomer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Color(0xffC9C9C9)),
