@@ -12,24 +12,12 @@ class ArrowBack extends StatefulWidget {
 class _ArrowBackState extends State<ArrowBack> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(width: 1, color: Color(0XFF7F909F)),
-      ),
-      height: 20,
-      width: 20,
-      child: InkWell(
-        onTap: widget.onTap,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        child: Image.asset(
-          "assets/icons/arrow-back.png",
-          width: 15,
-          height: 15,
-        ),
-      ),
+    return InkWell(
+      onTap: widget.onTap,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      child: Image.asset("assets/icons/arrow-back.png"),
     );
   }
 }

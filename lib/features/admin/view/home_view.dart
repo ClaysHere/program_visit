@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
-import 'package:program_visit/common/widgets/card_daftar_toko.dart';
+import 'package:program_visit/common/widgets/card_toko.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/row_text.dart';
@@ -88,7 +89,9 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: RowText(
-                onPressed: () {},
+                onPressed: () {
+                  context.go("/daftar-sales");
+                },
                 textKiri: "Daftar Sales",
                 textKanan: "Lihat lainnya",
               ),

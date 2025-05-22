@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:program_visit/common/styles/font.dart';
+import 'package:program_visit/common/widgets/avatar_profile.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 
 class CardSales extends StatelessWidget {
@@ -19,16 +20,10 @@ class CardSales extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: 35,
-            child: ClipOval(
-              child: Image.asset(
-                "assets/icons/profile.png",
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
+          AvatarProfile(
+            imagePath: "assets/icons/profile.png",
+            width: 60,
+            height: 60,
           ),
 
           SizedBox(height: 5),
