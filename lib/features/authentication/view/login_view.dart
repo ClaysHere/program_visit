@@ -55,10 +55,13 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(height: 10),
             InputForm(
               obscureText: enablePassword,
-              prefixIcon: Image.asset(
-                "assets/icons/user.png",
-                width: 22,
-                height: 22,
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(12),
+                child: Image.asset(
+                  "assets/icons/user.png",
+                  width: 22,
+                  height: 22,
+                ),
               ),
               hintText: "Masukkan Username Anda",
             ),
@@ -69,10 +72,13 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(height: 10),
             InputForm(
               obscureText: enablePassword,
-              prefixIcon: Image.asset(
-                "assets/icons/lock.png",
-                width: 22,
-                height: 22,
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(12),
+                child: Image.asset(
+                  "assets/icons/lock.png",
+                  width: 22,
+                  height: 22,
+                ),
               ),
               hintText: "Masukkan Password Anda",
               suffixIcon: IconButton(

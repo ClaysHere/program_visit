@@ -51,8 +51,8 @@ class InputForm extends StatelessWidget {
         ),
         filled: true,
         fillColor: AppColors.backgroundInputField,
-        contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-        prefixIcon: Padding(padding: EdgeInsets.all(12), child: prefixIcon),
+        contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 15),
+        prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
       ),
     );

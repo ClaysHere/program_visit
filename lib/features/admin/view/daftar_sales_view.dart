@@ -64,7 +64,12 @@ class DaftarSalesView extends StatelessWidget {
 
             SizedBox(height: 15),
 
-            ButtonGradient(onTap: () {}, title: "Tambah Sales"),
+            ButtonGradient(
+              onTap: () {
+                context.go("/pendaftaran-sales");
+              },
+              title: "Tambah Sales",
+            ),
           ],
         ),
       ),
