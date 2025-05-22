@@ -42,65 +42,21 @@ class DaftarSalesView extends StatelessWidget {
             Expanded(
               child: ListView(
                 physics: NeverScrollableScrollPhysics(),
-                children: [
-                  CardDaftarSales(
-                    imagePath: "assets/icons/profile.png",
-                    nama: 'Jhon Doe',
-                    tanggal: "22 Mei 2025",
-                    button: ButtonNormal(
-                      onPressed: () {},
-                      text: "Lihat Detail",
+                children: List.generate(
+                  5,
+                  (index) => Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: CardDaftarSales(
+                      imagePath: "assets/icons/profile.png",
+                      nama: 'M Fikri',
+                      tanggal: "22 Mei 2025 (tanggal daftar)",
+                      button: ButtonNormal(
+                        onPressed: () {},
+                        text: "Lihat Detail",
+                      ),
                     ),
                   ),
-
-                  SizedBox(height: 10),
-
-                  CardDaftarSales(
-                    imagePath: "assets/icons/profile.png",
-                    nama: 'Irfan Mulya',
-                    tanggal: "22 Mei 2025",
-                    button: ButtonNormal(
-                      onPressed: () {},
-                      text: "Lihat Detail",
-                    ),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  CardDaftarSales(
-                    imagePath: "assets/icons/profile.png",
-                    nama: 'M Fikri',
-                    tanggal: "22 Mei 2025",
-                    button: ButtonNormal(
-                      onPressed: () {},
-                      text: "Lihat Detail",
-                    ),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  CardDaftarSales(
-                    imagePath: "assets/icons/profile.png",
-                    nama: 'M Fikri',
-                    tanggal: "22 Mei 2025",
-                    button: ButtonNormal(
-                      onPressed: () {},
-                      text: "Lihat Detail",
-                    ),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  CardDaftarSales(
-                    imagePath: "assets/icons/profile.png",
-                    nama: 'M Fikri',
-                    tanggal: "22 Mei 2025 (tanggal daftar)",
-                    button: ButtonNormal(
-                      onPressed: () {},
-                      text: "Lihat Detail",
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
 
