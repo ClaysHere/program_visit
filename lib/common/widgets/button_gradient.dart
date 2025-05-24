@@ -33,7 +33,7 @@ class _ButtonGradientState extends State<ButtonGradient> {
                   widget.title,
                   style: TextStyle(
                     fontFamily: "Poppins",
-                    fontSize: 18,
+                    fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -55,8 +55,8 @@ class _ButtonGradientState extends State<ButtonGradient> {
               ),
             ),
             Positioned(
-              right: 50,
-              bottom: 40,
+              left: 20,
+              bottom: 27,
               child: Image.asset(
                 "assets/icons/medium.png",
                 width: 27,
@@ -64,7 +64,17 @@ class _ButtonGradientState extends State<ButtonGradient> {
               ),
             ),
             Positioned(
-              right: 90,
+              left: 15,
+              top: 30,
+              child: Image.asset(
+                "assets/icons/extra-small.png",
+                width: 10,
+                height: 10,
+              ),
+            ),
+            Positioned(
+              right: 50,
+              top: -5,
               bottom: 20,
               child: Image.asset(
                 "assets/icons/small.png",

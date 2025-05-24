@@ -3,8 +3,8 @@ import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/avatar_profile.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 
-class CardDaftarSales extends StatelessWidget {
-  const CardDaftarSales({
+class CardDaftarCustomer extends StatelessWidget {
+  const CardDaftarCustomer({
     super.key,
     required this.imagePath,
     required this.nama,
@@ -30,10 +30,10 @@ class CardDaftarSales extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AvatarProfile(
-            radius: 30,
+            radius: 40,
             imagePath: imagePath,
-            width: 70,
-            height: 70,
+            width: 80,
+            height: 80,
           ),
 
           const SizedBox(width: 10),
@@ -48,6 +48,7 @@ class CardDaftarSales extends StatelessWidget {
                   fontSize: 18,
                   fontWeight: AppFontWeight.semiBold,
                 ),
+                const SizedBox(height: 4),
                 CustomTextStyle(
                   text: tanggal,
                   fontSize: 12,
