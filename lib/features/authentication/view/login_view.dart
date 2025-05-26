@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/button_gradient.dart';
@@ -17,94 +18,119 @@ class _LoginViewState extends State<LoginView> {
   bool enablePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Image.asset(
-                "assets/images/banner-login.png",
-                width: 283,
-                height: 170,
-              ),
-            ),
-
-            SizedBox(height: 69),
-
-            CustomTextStyle(
-              text: "Selamat Datang di VisitApp",
-              fontSize: 23,
-              fontWeight: AppFontWeight.bold,
-            ),
-
-            SizedBox(height: 10),
-
-            CustomTextStyle(
-              text: "Satu applikasi untuk semua \nkebutuhan anda",
-              fontSize: 15,
-              fontWeight: AppFontWeight.regular,
-            ),
-
-            SizedBox(height: 50),
-
-            Label(text: "Username", simbol: " *"),
-            SizedBox(height: 10),
-            InputForm(
-              obscureText: enablePassword,
-              prefixIcon: Padding(
-                padding: EdgeInsets.all(12),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.05,
+            vertical: screenHeight * 0.04,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
                 child: Image.asset(
-                  "assets/icons/user.png",
-                  width: 22,
-                  height: 22,
+                  "assets/images/banner-login.png",
+                  width: screenWidth * 0.7,
+                  height: screenHeight * 0.25,
+                  fit: BoxFit.contain,
                 ),
               ),
-              hintText: "Masukkan Username Anda",
-            ),
 
-            SizedBox(height: 15),
+              SizedBox(height: screenHeight * 0.04),
 
-            Label(text: "Password", simbol: " *"),
-            SizedBox(height: 10),
-            InputForm(
-              obscureText: enablePassword,
-              prefixIcon: Padding(
-                padding: EdgeInsets.all(12),
-                child: Image.asset(
-                  "assets/icons/lock.png",
-                  width: 22,
-                  height: 22,
+              CustomTextStyle(
+                text: "Selamat Datang di VisitApp",
+                fontSize: screenWidth * 0.05,
+                fontWeight: AppFontWeight.bold,
+              ),
+
+              SizedBox(height: screenHeight * 0.015),
+
+              CustomTextStyle(
+                text: "Satu applikasi untuk semua \nkebutuhan anda",
+                fontSize: screenWidth * 0.035,
+                fontWeight: AppFontWeight.regular,
+              ),
+
+              SizedBox(height: screenHeight * 0.035),
+
+              Label(text: "Username", simbol: " *"),
+              SizedBox(height: screenHeight * 0.01),
+              InputForm(
+                obscureText: false,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Image.asset(
+                    "assets/icons/user.png",
+                    width: 22,
+                    height: 22,
+                  ),
+                ),
+                hintText: "Masukkan Username Anda",
+              ),
+
+              SizedBox(height: screenHeight * 0.02),
+
+              Label(text: "Password", simbol: " *"),
+              SizedBox(height: screenHeight * 0.01),
+              InputForm(
+                obscureText: enablePassword,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Image.asset(
+                    "assets/icons/lock.png",
+                    width: 22,
+                    height: 22,
+                  ),
+                ),
+                hintText: "Masukkan Password Anda",
+                suffixIcon: IconButton(
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onPressed: () {
+                    setState(() {
+                      enablePassword = !enablePassword;
+                    });
+                  },
+                  icon: Icon(
+                    enablePassword ? Icons.visibility_off : Icons.visibility,
+                    color: const Color(0xff7f909f),
+                  ),
                 ),
               ),
-              hintText: "Masukkan Password Anda",
-              suffixIcon: IconButton(
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                onPressed: () {
-                  setState(() {
-                    enablePassword = !enablePassword;
-                  });
+
+              SizedBox(height: screenHeight * 0.05),
+
+              ButtonGradient(
+                onTap: () {
+                  context.go("/");
                 },
-                icon: Icon(
-                  enablePassword ? Icons.visibility_off : Icons.visibility,
-                  color: Color(0xff7f909f),
-                ),
+                title: "Masuk",
               ),
-            ),
-
-            SizedBox(height: 45),
-
-            ButtonGradient(
-              onTap: () {
-                context.go("/");
-              },
-              title: "Masuk",
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

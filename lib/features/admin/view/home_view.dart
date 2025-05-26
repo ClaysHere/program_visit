@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
-import 'package:program_visit/common/widgets/card_toko.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/row_text.dart';
@@ -14,6 +13,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundHalaman,
       body: Column(
@@ -35,8 +36,8 @@ class HomeView extends StatelessWidget {
                     colors: [Color(0xff7F70D7), Color(0xffA192FA)],
                   ),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
                   ),
                 ),
                 child: Column(
@@ -65,16 +66,22 @@ class HomeView extends StatelessWidget {
                 right: 20,
                 child: Row(
                   children: [
-                    StatistikBox(
-                      title: "Jumlah Customer",
-                      value: "10 Orang",
-                      colors: [Color(0xffFE6337), Color(0xffFFA58B)],
+                    Expanded(
+                      child: StatistikBox(
+                        title: "Jumlah Customer",
+                        fontSize: width * 0.035,
+                        value: "10 Orang",
+                        colors: [Color(0xffFE6337), Color(0xffFFA58B)],
+                      ),
                     ),
                     const SizedBox(width: 16),
-                    StatistikBox(
-                      title: "Jumlah Sales",
-                      value: "10 Orang",
-                      colors: [Color(0xffB65FD7), Color(0xffE799FA)],
+                    Expanded(
+                      child: StatistikBox(
+                        title: "Jumlah Sales",
+                        fontSize: width * 0.035,
+                        value: "10 Orang",
+                        colors: [Color(0xffB65FD7), Color(0xffE799FA)],
+                      ),
                     ),
                   ],
                 ),
@@ -82,101 +89,78 @@ class HomeView extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 40),
+          const SizedBox(height: 50),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: RowText(
-              onPressed: () {
-                context.go("/daftar-sales");
-              },
-              textKiri: "Daftar Sales",
-              textKanan: "Lihat lainnya",
-            ),
-          ),
           SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: List.generate(
-                  5,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: InkWell(
-                      onTap: () {
-                        context.go("/detail-sales");
-                      },
-                      child: CardSales(name: "Joko"),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: RowText(
+                    onPressed: () {
+                      context.go("/daftar-sales");
+                    },
+                    textKiri: "Daftar Sales",
+                    textKanan: "Lihat lainnya",
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Row(
+                      children: List.generate(
+                        5,
+                        (index) => Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: InkWell(
+                            onTap: () {
+                              context.go("/detail-sales");
+                            },
+                            child: CardSales(name: "Joko"),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: RowText(
-              onPressed: () {
-                context.go("/daftar-customer");
-              },
-              textKiri: "Daftar Customer",
-              textKanan: "Lihat lainnya",
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: List.generate(
-                  5,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: InkWell(
-                      onTap: () {
-                        context.go("/detail-customer");
-                      },
-                      child: CardCustomer(name: "M Fikri"),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: RowText(
+                    onPressed: () {
+                      context.go("/daftar-customer");
+                    },
+                    textKiri: "Daftar Customer",
+                    textKanan: "Lihat lainnya",
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Row(
+                      children: List.generate(
+                        5,
+                        (index) => Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: InkWell(
+                            onTap: () {
+                              context.go("/detail-customer");
+                            },
+                            child: CardCustomer(name: "M Fikri"),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: RowText(
-              onPressed: () {},
-              textKiri: "Daftar Toko",
-              textKanan: "Lihat lainnya",
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Row(
-                children: List.generate(
-                  5,
-                  (index) => Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: CardDaftarToko(
-                      name: "Makmur Jaya",
-                      imagePath: "assets/images/toko.webp",
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 30),
         ],
       ),
     );
