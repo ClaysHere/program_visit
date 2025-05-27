@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:program_visit/features/service/api_service.dart';
 import 'package:program_visit/routing/app_routing.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  await ApiService.initTokens();
   runApp(const MyApp());
 }
 
