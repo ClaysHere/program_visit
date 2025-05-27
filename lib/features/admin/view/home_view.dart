@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
@@ -14,9 +13,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundHalaman,
       body: Column(
         children: [
           Stack(
@@ -24,12 +23,12 @@ class HomeView extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                height: 200,
-                padding: const EdgeInsets.only(
-                  top: 60,
-                  right: 20,
-                  bottom: 30,
-                  left: 20,
+                height: height * 0.25, // responsive height
+                padding: EdgeInsets.only(
+                  top: height * 0.08,
+                  right: width * 0.05,
+                  bottom: height * 0.03,
+                  left: width * 0.05,
                 ),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -44,16 +43,16 @@ class HomeView extends StatelessWidget {
                   children: [
                     CustomTextStyle(
                       text: "Selamat Datang, Admin!",
-                      fontSize: 20,
+                      fontSize: width * 0.05,
                       fontWeight: AppFontWeight.bold,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: height * 0.01),
                     CustomTextStyle(
                       text:
                           "Silakan kelola data layanan, pantau aktivitas pengguna, dan pastikan semuanya berjalan lancar",
                       textAlign: TextAlign.center,
-                      fontSize: 14,
+                      fontSize: width * 0.035,
                       fontWeight: AppFontWeight.regular,
                       color: Colors.white,
                     ),
@@ -61,9 +60,9 @@ class HomeView extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 170,
-                left: 20,
-                right: 20,
+                top: height * 0.21, // responsive position
+                left: width * 0.05,
+                right: width * 0.05,
                 child: Row(
                   children: [
                     Expanded(
@@ -74,7 +73,7 @@ class HomeView extends StatelessWidget {
                         colors: [Color(0xffFE6337), Color(0xffFFA58B)],
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: width * 0.04),
                     Expanded(
                       child: StatistikBox(
                         title: "Jumlah Sales",
@@ -89,76 +88,78 @@ class HomeView extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 50),
+          SizedBox(height: height * 0.06),
 
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: RowText(
-                    onPressed: () {
-                      context.go("/daftar-sales");
-                    },
-                    textKiri: "Daftar Sales",
-                    textKanan: "Lihat lainnya",
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                    child: RowText(
+                      onPressed: () {
+                        context.go("/daftar-sales");
+                      },
+                      textKiri: "Daftar Sales",
+                      textKanan: "Lihat lainnya",
+                    ),
                   ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
-                      children: List.generate(
-                        5,
-                        (index) => Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: InkWell(
-                            onTap: () {
-                              context.go("/detail-sales");
-                            },
-                            child: CardSales(name: "Joko"),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: width * 0.05),
+                      child: Row(
+                        children: List.generate(
+                          5,
+                          (index) => Padding(
+                            padding: EdgeInsets.only(right: width * 0.025),
+                            child: InkWell(
+                              onTap: () {
+                                context.go("/detail-sales");
+                              },
+                              child: const CardSales(name: "Joko"),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: RowText(
-                    onPressed: () {
-                      context.go("/daftar-customer");
-                    },
-                    textKiri: "Daftar Customer",
-                    textKanan: "Lihat lainnya",
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                    child: RowText(
+                      onPressed: () {
+                        context.go("/daftar-customer");
+                      },
+                      textKiri: "Daftar Customer",
+                      textKanan: "Lihat lainnya",
+                    ),
                   ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
-                      children: List.generate(
-                        5,
-                        (index) => Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: InkWell(
-                            onTap: () {
-                              context.go("/detail-customer");
-                            },
-                            child: CardCustomer(name: "M Fikri"),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: width * 0.05),
+                      child: Row(
+                        children: List.generate(
+                          5,
+                          (index) => Padding(
+                            padding: EdgeInsets.only(right: width * 0.025),
+                            child: InkWell(
+                              onTap: () {
+                                context.go("/detail-customer");
+                              },
+                              child: const CardCustomer(name: "M Fikri"),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

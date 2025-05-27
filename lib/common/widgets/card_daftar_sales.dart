@@ -9,57 +9,67 @@ class CardDaftarSales extends StatelessWidget {
     required this.imagePath,
     required this.nama,
     required this.tanggal,
-    required this.button,
+    required this.gender,
   });
 
   final String imagePath;
   final String nama;
   final String tanggal;
-  final Widget button;
+  final String gender;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      decoration: BoxDecoration(
-        border: Border.all(width: 1, color: const Color(0xffc9c9c9)),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AvatarProfile(
-            radius: 30,
-            imagePath: imagePath,
-            width: 70,
-            height: 70,
-          ),
+    final screenWidth = MediaQuery.of(context).size.width;
 
-          const SizedBox(width: 10),
+    // Gunakan nilai dinamis sesuai dengan resolusi layar
+    final double avatarSize = screenWidth < 360 ? 50 : 70;
+    final double fontSizeNama = screenWidth < 360 ? 15 : 18;
+    final double fontSizeDetail = screenWidth < 360 ? 11 : 13;
+    final double paddingHorizontal = screenWidth < 360 ? 12 : 10;
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomTextStyle(
-                  text: nama,
-                  fontSize: 18,
-                  fontWeight: AppFontWeight.semiBold,
-                ),
-                CustomTextStyle(
-                  text: tanggal,
-                  fontSize: 12,
-                  fontWeight: AppFontWeight.regular,
-                ),
-                const SizedBox(height: 8),
-
-                button,
-              ],
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: paddingHorizontal,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AvatarProfile(
+              radius: avatarSize / 2,
+              imagePath: imagePath,
+              width: avatarSize,
+              height: avatarSize,
             ),
-          ),
-        ],
+
+            const SizedBox(width: 10),
+
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextStyle(
+                    text: nama,
+                    fontSize: fontSizeNama,
+                    fontWeight: AppFontWeight.semiBold,
+                  ),
+                  SizedBox(height: 2),
+                  CustomTextStyle(
+                    text: tanggal,
+                    fontSize: fontSizeDetail,
+                    fontWeight: AppFontWeight.regular,
+                  ),
+                  CustomTextStyle(
+                    text: gender,
+                    fontSize: fontSizeDetail,
+                    fontWeight: AppFontWeight.regular,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

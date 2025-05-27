@@ -15,7 +15,7 @@ class _ButtonGradientState extends State<ButtonGradient> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 57,
+      height: 52,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -56,7 +56,7 @@ class _ButtonGradientState extends State<ButtonGradient> {
             ),
             Positioned(
               left: 20,
-              bottom: 27,
+              bottom: 24,
               child: Image.asset(
                 "assets/icons/medium.png",
                 width: 27,

@@ -19,6 +19,7 @@ class StatistikBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -35,7 +36,7 @@ class StatistikBox extends StatelessWidget {
         children: [
           CustomTextStyle(
             text: title,
-            fontSize: 14,
+            fontSize: fontSize,
             fontWeight: AppFontWeight.bold,
             color: Colors.white,
           ),
@@ -52,7 +53,7 @@ class StatistikBox extends StatelessWidget {
               const SizedBox(width: 4),
               CustomTextStyle(
                 text: value,
-                fontSize: 14,
+                fontSize: fontSize,
                 fontWeight: AppFontWeight.medium,
                 color: Colors.white,
               ),

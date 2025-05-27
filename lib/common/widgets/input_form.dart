@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:program_visit/common/styles/color.dart';
+import 'package:program_visit/common/styles/font.dart';
 
 class InputForm extends StatelessWidget {
   const InputForm({
@@ -29,7 +30,7 @@ class InputForm extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           fontFamily: "Poppins",
-          fontWeight: FontWeight.w400,
+          fontWeight: AppFontWeight.medium,
           fontSize: 15,
           color: Color(0xff7F909F),
         ),

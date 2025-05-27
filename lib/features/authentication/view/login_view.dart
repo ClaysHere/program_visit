@@ -6,6 +6,7 @@ import 'package:program_visit/common/widgets/button_gradient.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/input_form.dart';
 import 'package:program_visit/common/widgets/label.dart';
+import 'package:program_visit/features/authentication/controller/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -15,7 +16,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool enablePassword = true;
+  final LoginController controller = LoginController();
 
   @override
   void initState() {
@@ -96,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
               Label(text: "Password", simbol: " *"),
               SizedBox(height: screenHeight * 0.01),
               InputForm(
-                obscureText: enablePassword,
+                obscureText: controller.enablePassword,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Image.asset(
@@ -110,12 +111,12 @@ class _LoginViewState extends State<LoginView> {
                   highlightColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   onPressed: () {
-                    setState(() {
-                      enablePassword = !enablePassword;
-                    });
+                    controller.togglePasswordVisibility(setState);
                   },
                   icon: Icon(
-                    enablePassword ? Icons.visibility_off : Icons.visibility,
+                    controller.enablePassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
                     color: const Color(0xff7f909f),
                   ),
                 ),
