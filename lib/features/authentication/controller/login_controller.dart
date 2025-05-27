@@ -41,7 +41,7 @@ class LoginController {
         // context.go('/user_dashboard'); // Contoh: rute khusus customer/user biasa
       }
     } else {
-      SnackbarHelper.showSuccess(
+      SnackbarHelper.showError(
         context,
         'Login gagal. Periksa username dan password Anda.',
       );
