@@ -70,7 +70,8 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: screenHeight * 0.015),
 
               CustomTextStyle(
-                text: "Satu applikasi untuk semua \nkebutuhan anda",
+                text:
+                    "Masukkan username dan password anda \nuntuk menjelajahi aplikasi ini",
                 fontSize: screenWidth * 0.035,
                 fontWeight: AppFontWeight.regular,
               ),

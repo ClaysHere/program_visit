@@ -46,7 +46,6 @@ class ApiService {
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'username': username, 'password': password}),
       );
-
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final authResponse = AuthResponse.fromJson(data);
@@ -59,35 +58,6 @@ class ApiService {
     } catch (e) {
       print('Error during login: $e');
       return null;
-    }
-  }
-
-  // Fungsi untuk logout
-  static Future<bool> logout() async {
-    if (_accessToken == null) return true; // Sudah logout
-
-    final url = Uri.parse(
-      '$_baseUrl/logout',
-    ); // Ganti dengan endpoint logout Anda
-    try {
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200 || response.statusCode == 204) {
-        // 200 OK atau 204 No Content
-        await _clearTokens();
-        return true;
-      } else {
-        print('Logout failed: ${response.statusCode} - ${response.body}');
-        await _clearTokens(); // Meskipun gagal di server, tetap hapus token lokal
-        return false;
-      }
-    } catch (e) {
-      print('Error during logout: $e');
-      await _clearTokens(); // Tetap hapus token lokal
-      return false;
     }
   }
 
@@ -130,6 +100,35 @@ class ApiService {
       print('Error refreshing token: $e');
       await _clearTokens();
       return null;
+    }
+  }
+
+  // Fungsi untuk logout
+  static Future<bool> logout() async {
+    if (_accessToken == null) return true; // Sudah logout
+
+    final url = Uri.parse(
+      '$_baseUrl/logout',
+    ); // Ganti dengan endpoint logout Anda
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        // 200 OK atau 204 No Content
+        await _clearTokens();
+        return true;
+      } else {
+        print('Logout failed: ${response.statusCode} - ${response.body}');
+        await _clearTokens(); // Meskipun gagal di server, tetap hapus token lokal
+        return false;
+      }
+    } catch (e) {
+      print('Error during logout: $e');
+      await _clearTokens(); // Tetap hapus token lokal
+      return false;
     }
   }
 

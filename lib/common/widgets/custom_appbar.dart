@@ -33,6 +33,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               fontWeight: AppFontWeight.semiBold,
               color: color,
             ),
+
             scrolledUnderElevation: 0,
             leading: Padding(
               padding: const EdgeInsets.only(left: 20),

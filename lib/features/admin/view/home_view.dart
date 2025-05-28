@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
@@ -16,6 +17,7 @@ class HomeView extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundHalaman,
       body: Column(
         children: [
           Stack(
@@ -23,7 +25,7 @@ class HomeView extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                height: height * 0.25, // responsive height
+                height: height * 0.25,
                 padding: EdgeInsets.only(
                   top: height * 0.08,
                   right: width * 0.05,
@@ -116,10 +118,15 @@ class HomeView extends StatelessWidget {
                           (index) => Padding(
                             padding: EdgeInsets.only(right: width * 0.025),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              overlayColor: WidgetStateProperty.all(
+                                Colors.transparent,
+                              ),
                               onTap: () {
                                 context.go("/detail-sales");
                               },
-                              child: const CardSales(name: "Joko"),
+                              child: CardSales(name: "Iqbal"),
                             ),
                           ),
                         ),
@@ -148,6 +155,11 @@ class HomeView extends StatelessWidget {
                           (index) => Padding(
                             padding: EdgeInsets.only(right: width * 0.025),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              overlayColor: WidgetStateProperty.all(
+                                Colors.transparent,
+                              ),
                               onTap: () {
                                 context.go("/detail-customer");
                               },
