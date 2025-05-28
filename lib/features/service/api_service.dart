@@ -194,11 +194,11 @@ class ApiService with WidgetsBindingObserver {
 
         return authResponse;
       } else {
-        print('Login failed: ${response.statusCode} - ${response.body}');
+        print('Login gagal: ${response.statusCode} - ${response.body}');
         return null;
       }
     } catch (e) {
-      print('Error during login: $e');
+      print('Error selama login: $e');
       return null;
     }
   }
