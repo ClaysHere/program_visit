@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/button_gradient.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
@@ -32,6 +31,7 @@ class _LoginViewState extends State<LoginView> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    controller.dispose();
     super.dispose();
   }
 
@@ -70,7 +70,8 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: screenHeight * 0.015),
 
               CustomTextStyle(
-                text: "Satu applikasi untuk semua \nkebutuhan anda",
+                text:
+                    "Masukkan username dan password anda \nuntuk menjelajahi aplikasi ini",
                 fontSize: screenWidth * 0.035,
                 fontWeight: AppFontWeight.regular,
               ),
@@ -80,6 +81,7 @@ class _LoginViewState extends State<LoginView> {
               Label(text: "Username", simbol: " *"),
               SizedBox(height: screenHeight * 0.01),
               InputForm(
+                controller: controller.usernameController,
                 obscureText: false,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12),
@@ -97,6 +99,7 @@ class _LoginViewState extends State<LoginView> {
               Label(text: "Password", simbol: " *"),
               SizedBox(height: screenHeight * 0.01),
               InputForm(
+                controller: controller.passwordController,
                 obscureText: controller.enablePassword,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12),
@@ -126,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
 
               ButtonGradient(
                 onTap: () {
-                  context.go("/");
+                  controller.login(context);
                 },
                 title: "Masuk",
               ),

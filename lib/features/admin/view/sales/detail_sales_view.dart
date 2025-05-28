@@ -131,7 +131,7 @@ class DetailSalesView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
@@ -150,7 +150,7 @@ class DetailSalesView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [

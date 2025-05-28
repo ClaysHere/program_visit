@@ -35,6 +35,9 @@ class DaftarSalesView extends StatelessWidget {
           separatorBuilder: (_, __) => SizedBox(height: spacing),
           itemBuilder: (context, index) {
             return InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
               onTap: () {
                 context.go("/detail-sales");
               },

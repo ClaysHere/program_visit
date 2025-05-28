@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
+import 'package:program_visit/common/widgets/button_normal.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/row_text.dart';
 import 'package:program_visit/common/widgets/statistik_box.dart';
+import 'package:program_visit/features/authentication/controller/logout_controller.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  final LogoutController controller = LogoutController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class HomeView extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundHalaman,
       body: Column(
         children: [
           Stack(
@@ -23,7 +29,7 @@ class HomeView extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                height: height * 0.25, // responsive height
+                height: height * 0.25,
                 padding: EdgeInsets.only(
                   top: height * 0.08,
                   right: width * 0.05,
@@ -116,10 +122,15 @@ class HomeView extends StatelessWidget {
                           (index) => Padding(
                             padding: EdgeInsets.only(right: width * 0.025),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              overlayColor: WidgetStateProperty.all(
+                                Colors.transparent,
+                              ),
                               onTap: () {
                                 context.go("/detail-sales");
                               },
-                              child: const CardSales(name: "Joko"),
+                              child: CardSales(name: "Iqbal"),
                             ),
                           ),
                         ),
@@ -148,6 +159,11 @@ class HomeView extends StatelessWidget {
                           (index) => Padding(
                             padding: EdgeInsets.only(right: width * 0.025),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              overlayColor: WidgetStateProperty.all(
+                                Colors.transparent,
+                              ),
                               onTap: () {
                                 context.go("/detail-customer");
                               },
@@ -156,6 +172,17 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                    child: ButtonNormal(
+                      onPressed: () {
+                        controller.logout(context);
+                      },
+                      text: "Keluar",
+                      fontSize: 12,
                     ),
                   ),
                 ],

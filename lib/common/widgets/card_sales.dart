@@ -11,9 +11,11 @@ class CardSales extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      surfaceTintColor: Color(0xffc9c9c9),
+      elevation: 1,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,13 +27,22 @@ class CardSales extends StatelessWidget {
               height: 60,
             ),
 
-            SizedBox(height: 5),
+            const SizedBox(height: 10),
 
-            CustomTextStyle(
-              text: name,
-              fontSize: 13,
-              fontWeight: AppFontWeight.semiBold,
-              color: Color(0xff959595),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.grey),
+              ),
+              child: CustomTextStyle(
+                text: name,
+                fontSize: 13,
+                fontWeight: AppFontWeight.bold,
+                color: Colors.black45,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+              ),
             ),
           ],
         ),

@@ -12,7 +12,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeView(),
+    HomeView(),
     const Center(child: Text('Jadwal Page')),
     const Center(child: Text('Setting Page')),
   ];
