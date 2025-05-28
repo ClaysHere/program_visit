@@ -67,20 +67,6 @@ class LoginController {
     }
   }
 
-  Future<void> logout(BuildContext context) async {
-    final success = await ApiService.logout();
-    if (success) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Anda telah logout.')));
-      context.go('/login'); // Arahkan kembali ke halaman login
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Logout gagal. Silakan coba lagi.')),
-      );
-    }
-  }
-
   void dispose() {
     usernameController.dispose();
     passwordController.dispose();

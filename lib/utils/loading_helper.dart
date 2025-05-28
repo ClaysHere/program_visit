@@ -17,7 +17,7 @@ void showLoadingDialog(BuildContext context) {
           child: Center(
             child: LoadingAnimationWidget.staggeredDotsWave(
               color: Colors.white,
-              size: 80,
+              size: 60,
             ),
           ),
         ),

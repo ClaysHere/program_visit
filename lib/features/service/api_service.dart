@@ -39,7 +39,7 @@ class ApiService {
 
   // Fungsi untuk login
   static Future<AuthResponse?> login(String username, String password) async {
-    final url = Uri.parse('$_baseUrl/login');
+    final url = Uri.parse('$_baseUrl/auth/login');
     try {
       final response = await http.post(
         url,
@@ -108,12 +108,13 @@ class ApiService {
     if (_accessToken == null) return true; // Sudah logout
 
     final url = Uri.parse(
-      '$_baseUrl/logout',
+      '$_baseUrl/auth/logout',
     ); // Ganti dengan endpoint logout Anda
     try {
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
+        body: json.encode({'refresh_token': _refreshToken}),
       );
 
       if (response.statusCode == 200 || response.statusCode == 204) {
@@ -121,12 +122,12 @@ class ApiService {
         await _clearTokens();
         return true;
       } else {
-        print('Logout failed: ${response.statusCode} - ${response.body}');
+        print('Logout gagal: ${response.statusCode} - ${response.body}');
         await _clearTokens(); // Meskipun gagal di server, tetap hapus token lokal
         return false;
       }
     } catch (e) {
-      print('Error during logout: $e');
+      print('Error selama logout: $e');
       await _clearTokens(); // Tetap hapus token lokal
       return false;
     }
