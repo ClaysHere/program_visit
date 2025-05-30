@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:program_visit/features/admin/view/form/form_pendaftaran_user.dart';
 import 'package:program_visit/features/admin/view/home_view.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -9,43 +10,36 @@ class BottomNavbar extends StatefulWidget {
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {
-  int _currentIndex = 0;
+  int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    HomeView(),
-    const Center(child: Text('Jadwal Page')),
-    const Center(child: Text('Setting Page')),
-  ];
+  final List<Widget> widgetOptions = [HomeView(), const FormPendaftaranUser()];
 
-  @override
-  void initState() {
-    super.initState();
-    _currentIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex], // Menampilkan halaman berdasarkan tab
+      body: SafeArea(child: widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index; // Update tab yang dipilih
-          });
-        },
-        selectedItemColor: Colors.deepPurple,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.blueGrey,
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Jadwal',
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

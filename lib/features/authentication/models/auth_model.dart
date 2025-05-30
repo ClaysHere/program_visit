@@ -45,8 +45,7 @@ class User {
   final String? email;
   final String? city;
   final String? religion;
-  final String?
-  photoPath; // blob biasanya diwakili oleh String path atau base64
+  final String? photoPath;
   final DateTime? joinDate;
   final bool isSuspended;
   final String? inputCode;
