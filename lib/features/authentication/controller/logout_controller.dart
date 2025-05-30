@@ -33,8 +33,6 @@ class LogoutController {
       Navigator.of(context, rootNavigator: true).pop();
 
       SnackbarHelper.showError(context, 'Terjadi kesalahan: ${e.toString()}');
-    } finally {
-      hideLoadingDialog(context);
     }
   }
 }
