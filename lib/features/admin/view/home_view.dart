@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
-import 'package:program_visit/common/widgets/bottom_navbar.dart';
 import 'package:program_visit/common/widgets/button_normal.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
@@ -192,7 +191,6 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavbar(),
     );
   }
 }
