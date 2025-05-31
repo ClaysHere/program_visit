@@ -1,15 +1,19 @@
-// ignore_for_file: unused_field
+// views/form_pendaftaran_user.dart
+// ignore_for_file: unused_field, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/font.dart';
 import 'package:program_visit/common/widgets/bottom_navbar.dart';
 import 'package:program_visit/common/widgets/custom_appbar.dart';
-import 'package:program_visit/common/widgets/custom_dropdown_buton.dart';
+import 'package:program_visit/common/widgets/custom_dropdown_buton.dart'; // Import CustomDropdownButton yang sudah diperbaiki
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/datetime_input_form.dart';
 import 'package:program_visit/common/widgets/input_form.dart';
 import 'package:program_visit/common/widgets/label.dart';
+import 'package:program_visit/features/admin/models/register_user_model.dart';
+import 'package:program_visit/features/service/api_service.dart';
+import 'package:program_visit/utils/snackbar_helper.dart';
 
 class FormPendaftaranUser extends StatefulWidget {
   const FormPendaftaranUser({super.key});
@@ -20,12 +24,102 @@ class FormPendaftaranUser extends StatefulWidget {
 
 class _FormPendaftaranUserState extends State<FormPendaftaranUser> {
   bool enablePassword = true;
-  DateTime? _selectedDate;
+  DateTime? _selectedJoinDate;
+  DateTime? _selectedBirthDate;
+  UserType? _selectedUserType;
 
-  void _onSelectedDateChanged(DateTime date) {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _birthPlaceController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _religionController = TextEditingController();
+
+  void _onSelectedJoinDateChanged(DateTime date) {
     setState(() {
-      _selectedDate = date;
+      _selectedJoinDate = date;
     });
+  }
+
+  void _onSelectedBirthDateChanged(DateTime date) {
+    setState(() {
+      _selectedBirthDate = date;
+    });
+  }
+
+  Future<void> _registerUser() async {
+    if (_selectedUserType == null ||
+        _selectedJoinDate == null ||
+        _selectedBirthDate == null ||
+        _usernameController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _firstNameController.text.isEmpty ||
+        _lastNameController.text.isEmpty ||
+        _genderController.text.isEmpty ||
+        _birthPlaceController.text.isEmpty ||
+        _addressController.text.isEmpty ||
+        _phoneController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _cityController.text.isEmpty ||
+        _religionController.text.isEmpty) {
+      SnackbarHelper.showError(
+        context,
+        'Harap isi semua kolom yang wajib diisi.',
+      );
+      return;
+    }
+
+    final RegisterUserModel? newUser = await ApiService.registerAdminDanSales(
+      username: _usernameController.text,
+      password: _passwordController.text,
+      firstName: _firstNameController.text,
+      lastName: _lastNameController.text,
+      userType: _selectedUserType!,
+      gender: _genderController.text,
+      birthPlace: _birthPlaceController.text,
+      birthDate: _selectedBirthDate!,
+      address: _addressController.text,
+      phone: _phoneController.text,
+      email: _emailController.text,
+      city: _cityController.text,
+      religion: _religionController.text,
+      joinDate: _selectedJoinDate!,
+      isSuspended: false,
+    );
+
+    if (newUser != null) {
+      SnackbarHelper.showSuccess(
+        context,
+        'Pengguna ${newUser.username} berhasil terdaftar!',
+      );
+      context.go('/');
+    } else {
+      SnackbarHelper.showError(
+        context,
+        'Gagal mendaftarkan pengguna. Silakan coba lagi.',
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _genderController.dispose();
+    _birthPlaceController.dispose();
+    _addressController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    _cityController.dispose();
+    _religionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,7 +142,7 @@ class _FormPendaftaranUserState extends State<FormPendaftaranUser> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: TextButton(
-              onPressed: () {},
+              onPressed: _registerUser,
               child: CustomTextStyle(
                 text: "Simpan",
                 fontSize: 17,
@@ -64,47 +158,71 @@ class _FormPendaftaranUserState extends State<FormPendaftaranUser> {
           left: paddingHorizontal,
           right: paddingHorizontal,
           top: verticalSpacing,
-        ), // Padding bawah sedikit lebih besar
+          bottom: verticalSpacing * 0.5,
+        ),
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(), // Efek scroll iOS/Android
+          physics: const BouncingScrollPhysics(),
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: 500,
-              ), // Batas lebar maksimum untuk tablet/desktop
+              constraints: const BoxConstraints(maxWidth: 500),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Label(text: "Pilih User"),
+                  const Label(text: "Pilih User"),
                   SizedBox(height: verticalSpacing * 0.25),
-                  CustomDropdownButon(),
+                  // Pemanggilan CustomDropdownButton untuk UserType
+                  CustomDropdownButton<UserType>(
+                    value: _selectedUserType,
+                    items:
+                        UserType.values.map((UserType type) {
+                          return DropdownMenuItem<UserType>(
+                            value: type,
+                            child: Text(type.name.capitalize()),
+                          );
+                        }).toList(),
+                    hintText: "Pilih Tipe User",
+                    onChanged: (UserType? newValue) {
+                      setState(() {
+                        _selectedUserType = newValue;
+                      });
+                    },
+                  ),
 
                   SizedBox(height: verticalSpacing),
 
-                  Label(text: "Nama Depan"),
-                  SizedBox(height: verticalSpacing * 0.25),
-                  InputForm(hintText: "Masukkan nama depan anda"),
-
-                  SizedBox(height: verticalSpacing),
-
-                  Label(text: "Nama Belakang"),
-                  SizedBox(height: verticalSpacing * 0.25),
-                  InputForm(hintText: "Masukkan nama belakang anda"),
-
-                  SizedBox(height: verticalSpacing),
-
-                  Label(text: "Username"),
-                  SizedBox(
-                    height: verticalSpacing * 0.25,
-                  ), // Spasi yang lebih kecil
-                  InputForm(hintText: "Masukkan username anda"),
-
-                  SizedBox(height: verticalSpacing),
-
-                  Label(text: "Password"),
+                  const Label(text: "Nama Depan"),
                   SizedBox(height: verticalSpacing * 0.25),
                   InputForm(
-                    hintText: "Masukkan password anda",
+                    hintText: "Masukkan nama depan Anda",
+                    controller: _firstNameController,
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "Nama Belakang"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputForm(
+                    hintText: "Masukkan nama belakang Anda",
+                    controller: _lastNameController,
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "Username"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputForm(
+                    hintText: "Masukkan username Anda",
+                    controller: _usernameController,
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "Password"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputForm(
+                    hintText: "Masukkan password Anda",
+                    controller: _passwordController,
+                    obscureText: enablePassword,
                     suffixIcon: IconButton(
                       highlightColor: Colors.transparent,
                       hoverColor: Colors.transparent,
@@ -117,53 +235,132 @@ class _FormPendaftaranUserState extends State<FormPendaftaranUser> {
                         enablePassword
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: Color(0xff7f909f),
-                        size:
-                            isSmallScreen
-                                ? 20
-                                : 24, // Ukuran ikon juga responsif
+                        color: const Color(0xff7f909f),
+                        size: isSmallScreen ? 20 : 24,
                       ),
                     ),
                   ),
 
                   SizedBox(height: verticalSpacing),
 
-                  Label(text: "Tanggal Daftar"),
+                  const Label(text: "Tanggal Daftar"),
                   SizedBox(height: verticalSpacing * 0.25),
                   InputFormDatetime(
-                    onSelectedDateChanged: _onSelectedDateChanged,
+                    onSelectedDateChanged: _onSelectedJoinDateChanged,
+                    selectedDate: _selectedJoinDate,
+                    hintText: "Masukkan tanggal daftar Anda",
                   ),
 
                   SizedBox(height: verticalSpacing),
 
-                  Label(text: "Alamat"),
+                  const Label(text: "Alamat"),
                   SizedBox(height: verticalSpacing * 0.25),
-                  InputForm(hintText: "Masukkan alamat anda"),
+                  InputForm(
+                    hintText: "Masukkan alamat Anda",
+                    controller: _addressController,
+                  ),
 
                   SizedBox(height: verticalSpacing),
 
-                  Label(text: "Email"),
+                  const Label(text: "Email"),
                   SizedBox(height: verticalSpacing * 0.25),
-                  InputForm(hintText: "Masukkan email anda"),
+                  InputForm(
+                    hintText: "Masukkan email Anda",
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
 
                   SizedBox(height: verticalSpacing),
 
-                  Label(text: "Jenis Kelamin"),
+                  const Label(text: "Jenis Kelamin"),
                   SizedBox(height: verticalSpacing * 0.25),
-                  InputForm(hintText: "Masukkan jenis kelamin anda"),
+                  // Pemanggilan CustomDropdownButton untuk String (Jenis Kelamin)
+                  CustomDropdownButton<String>(
+                    value:
+                        _genderController.text.isNotEmpty
+                            ? _genderController.text
+                            : null,
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Laki-laki',
+                        child: Text('Laki-laki'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Perempuan',
+                        child: Text('Perempuan'),
+                      ),
+                    ],
+                    hintText: "Pilih jenis kelamin",
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        setState(() {
+                          _genderController.text = newValue;
+                        });
+                      }
+                    },
+                  ),
 
                   SizedBox(height: verticalSpacing),
 
-                  Label(text: "No Handphone"),
+                  const Label(text: "Tempat Lahir"),
                   SizedBox(height: verticalSpacing * 0.25),
-                  InputForm(hintText: "Masukkan no handphone anda"),
+                  InputForm(
+                    hintText: "Masukkan tempat lahir Anda",
+                    controller: _birthPlaceController,
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "Tanggal Lahir"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputFormDatetime(
+                    onSelectedDateChanged: _onSelectedBirthDateChanged,
+                    selectedDate: _selectedBirthDate,
+                    hintText: "Masukkan tanggal lahir Anda",
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "Kota"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputForm(
+                    hintText: "Masukkan kota Anda",
+                    controller: _cityController,
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "Agama"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputForm(
+                    hintText: "Masukkan agama Anda",
+                    controller: _religionController,
+                  ),
+
+                  SizedBox(height: verticalSpacing),
+
+                  const Label(text: "No Handphone"),
+                  SizedBox(height: verticalSpacing * 0.25),
+                  InputForm(
+                    hintText: "Masukkan nomor handphone Anda",
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                  ),
+                  SizedBox(height: verticalSpacing),
                 ],
               ),
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavbar(),
+      bottomNavigationBar: const BottomNavbar(),
     );
+  }
+}
+
+extension StringCasingExtension on String {
+  String capitalize() {
+    if (isEmpty) return this;
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 }

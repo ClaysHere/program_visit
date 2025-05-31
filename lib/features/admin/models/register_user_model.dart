@@ -3,7 +3,8 @@ enum UserType { admin, sales }
 class RegisterUserModel {
   final int? id;
   final String username;
-  final String password;
+  final String
+  password; // Potentially sensitive, handle with care (e.g., only for sending, not receiving)
   final String firstName;
   final String lastName;
   final UserType userType;
@@ -47,20 +48,21 @@ class RegisterUserModel {
     this.updatedAt,
   });
 
-  // Factory constructor untuk membuat objek User dari JSON (misalnya dari respons API)
+  // Factory constructor to create a User object from JSON (e.g., from API response)
   factory RegisterUserModel.fromJson(Map<String, dynamic> json) {
     return RegisterUserModel(
       id: json['id'] as int?,
       username: json['username'] as String,
-      password: '', // Password tidak akan dikirim kembali dari API
+      password:
+          '', // Password should ideally not be sent back from the API for security
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
       userType: UserType.values.firstWhere(
         (e) => e.name == json['user_type'],
-        orElse: () => UserType.admin, // Default jika user_type tidak dikenal
+        orElse: () => UserType.admin, // Default if user_type is unknown
       ),
       gender: json['gender'] as String,
-      birthPlace: json['birth_place'] as String, // String
+      birthPlace: json['birth_place'] as String,
       birthDate:
           json['birth_date'] != null
               ? DateTime.parse(json['birth_date'] as String)
@@ -89,26 +91,27 @@ class RegisterUserModel {
     );
   }
 
-  // Metode untuk mengonversi objek User menjadi JSON (misalnya untuk dikirim ke API)
+  // Method to convert a User object to JSON (e.g., for sending to API)
   Map<String, dynamic> toJson() {
     return {
-      // 'id': id, // ID biasanya tidak dikirim saat membuat/memperbarui
+      // 'id': id, // ID is usually not sent when creating/updating
       'username': username,
-      'password': password, // Pastikan ini hanya untuk registrasi/login
+      'password': password, // Ensure this is only for registration/login
       'first_name': firstName,
       'last_name': lastName,
       'user_type': userType.name,
       'gender': gender,
-      'birth_place': birthPlace, // String
-      'birth_date': birthDate?.toIso8601String(),
+      'birth_place': birthPlace,
+      'birth_date': birthDate?.toUtc().toIso8601String(),
       'address': address,
       'phone': phone,
       'email': email,
       'city': city,
       'religion': religion,
       'photo_path': photoPath,
-      'join_date': joinDate?.toIso8601String(),
-      'is_suspended': isSuspended ? 1 : 0, // Konversi bool ke int
+      'join_date': joinDate?.toUtc().toIso8601String(),
+      'is_suspended':
+          isSuspended ? 1 : 0, // Convert bool to int for tinyint in DB
       'input_code': inputCode,
       'created_at': createdAt?.toIso8601String(),
       'update_code': updateCode,
