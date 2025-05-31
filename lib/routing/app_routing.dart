@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:program_visit/features/admin/pages/akun_screen.dart';
 import 'package:program_visit/features/admin/view/customer/daftar_customer_view.dart';
 import 'package:program_visit/features/admin/view/customer/detail_customer_view.dart';
+import 'package:program_visit/features/admin/view/form/form_pendaftaran_user.dart';
+import 'package:program_visit/features/admin/pages/jadwal_screen.dart';
 import 'package:program_visit/features/admin/view/sales/daftar_sales_view.dart';
 import 'package:program_visit/features/admin/view/sales/detail_sales_view.dart';
-import 'package:program_visit/features/admin/view/home_view.dart';
+import 'package:program_visit/features/admin/pages/home_view.dart';
 import 'package:program_visit/features/authentication/view/login_view.dart';
 import 'package:program_visit/features/service/api_service.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-// import 'package:program_visit/main.dart'; // Import ini TIDAK diperlukan lagi jika navigatorKey tidak digunakan di sini
 
 final GoRouter appRouter = GoRouter(
   initialLocation: "/login",
@@ -60,6 +62,24 @@ final GoRouter appRouter = GoRouter(
       path: '/detail-customer',
       builder: (BuildContext context, GoRouterState state) {
         return const DetailCustomerView();
+      },
+    ),
+    GoRoute(
+      path: '/akun',
+      builder: (BuildContext context, GoRouterState state) {
+        return AkunScreen();
+      },
+    ),
+    GoRoute(
+      path: '/jadwal',
+      builder: (BuildContext context, GoRouterState state) {
+        return const JadwalScreen();
+      },
+    ),
+    GoRoute(
+      path: '/pendaftaran-user',
+      builder: (BuildContext context, GoRouterState state) {
+        return const FormPendaftaranUser();
       },
     ),
   ],

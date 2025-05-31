@@ -10,12 +10,16 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     required this.nama,
     this.color,
     this.bottom,
+    this.centerTitle,
+    this.actions,
   });
 
   final VoidCallback onTap;
   final String nama;
   final Widget? bottom;
   final Color? color;
+  final bool? centerTitle;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +37,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               fontWeight: AppFontWeight.semiBold,
               color: color,
             ),
-
+            centerTitle: centerTitle,
             scrolledUnderElevation: 0,
             leading: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(right: 10, left: 10),
               child: ArrowBack(onTap: onTap),
             ),
+            actions: actions,
           ),
           if (bottom != null)
             Padding(
