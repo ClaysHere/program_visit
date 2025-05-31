@@ -1,33 +1,32 @@
-import 'package:program_visit/features/service/api_service.dart';
+enum UserType { admin, sales }
 
 class RegisterUserModel {
-  final int? id; // int [primary key]
-  final String username; // varchar(30) UNIQUE
-  final String
-  password; // varchar(64) - Biasanya tidak dikirim kembali dari API
-  final String firstName; // varchar(30)
-  final String lastName; // varchar(30)
-  final UserType userType; // user_type (enum)
-  final String gender; // varchar(30)
-  final String birthPlace; // varchar(30) - Mengoreksi dari DateTime ke String
-  final DateTime? birthDate; // datetime
-  final String address; // varchar(250)
-  final String phone; // varchar(100)
-  final String email; // varchar(100)
-  final String city; // varchar(50)
-  final String religion; // varchar(30)
-  final String? photoPath; // blob - Asumsi URL atau base64 string
-  final DateTime? joinDate; // date
-  final bool isSuspended; // tinyint (0/1)
-  final String? inputCode; // varchar(30)
-  final DateTime? createdAt; // datetime
-  final String? updateCode; // varchar(30)
-  final DateTime? updatedAt; // datetime
+  final int? id;
+  final String username;
+  final String password;
+  final String firstName;
+  final String lastName;
+  final UserType userType;
+  final String gender;
+  final String birthPlace;
+  final DateTime? birthDate;
+  final String address;
+  final String phone;
+  final String email;
+  final String city;
+  final String religion;
+  final String? photoPath;
+  final DateTime? joinDate;
+  final bool isSuspended;
+  final String? inputCode;
+  final DateTime? createdAt;
+  final String? updateCode;
+  final DateTime? updatedAt;
 
   RegisterUserModel({
     this.id,
     required this.username,
-    required this.password, // Password hanya untuk registrasi/login, tidak untuk model yang diterima dari API
+    required this.password,
     required this.firstName,
     required this.lastName,
     required this.userType,
@@ -76,7 +75,7 @@ class RegisterUserModel {
           json['join_date'] != null
               ? DateTime.parse(json['join_date'] as String)
               : null,
-      isSuspended: (json['is_suspended'] as int) == 1, // Konversi int ke bool
+      isSuspended: (json['is_suspended'] as int) == 1,
       inputCode: json['input_code'] as String?,
       createdAt:
           json['created_at'] != null

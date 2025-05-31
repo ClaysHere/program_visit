@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:program_visit/common/styles/color.dart';
 import 'package:program_visit/common/styles/font.dart';
-import 'package:program_visit/common/widgets/button_normal.dart';
+import 'package:program_visit/common/widgets/bottom_navbar.dart';
 import 'package:program_visit/common/widgets/card_customer.dart';
 import 'package:program_visit/common/widgets/card_sales.dart';
 import 'package:program_visit/common/widgets/custom_text_style.dart';
 import 'package:program_visit/common/widgets/row_text.dart';
 import 'package:program_visit/common/widgets/statistik_box.dart';
-import 'package:program_visit/features/authentication/controller/logout_controller.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({super.key});
-
-  final LogoutController controller = LogoutController();
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -174,23 +171,13 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-                    child: ButtonNormal(
-                      onPressed: () {
-                        controller.logout(context);
-                      },
-                      text: "Keluar",
-                      fontSize: 12,
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavbar(),
     );
   }
 }
